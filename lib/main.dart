@@ -8,24 +8,32 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 
 Future<void> main() async {
+  // Memastikan bahwa Flutter Binding telah diinisialisasi
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Memanggil fungsi untuk menginisialisasi database
   await DBHelper.db();
+
+  // Menginisialisasi penyimpanan lokal GetStorage
   await GetStorage.init();
+
+  // Menjalankan aplikasi
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  // Widget yang menjadi akar dari aplikasi
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        theme: Themes.light,
-        darkTheme: Themes.dark,
-        themeMode: ThemeService().theme,
-        home: HomePage());
+        theme: Themes.light, // Tema aplikasi dalam light mode
+        darkTheme: Themes.dark, // Tema aplikasi dalam dark mode
+        themeMode:
+            ThemeService().theme, // Mode tema yang digunakan dari ThemeService
+        home: HomePage()); // Halaman utama aplikasi
   }
 }
